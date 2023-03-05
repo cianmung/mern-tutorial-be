@@ -80,7 +80,7 @@ const deleteNote = asyncHandler(async (req, res) => {
     return res.status(400).json({ message: "Note ID is required." });
   }
 
-  const note = await User.findById(id).exec();
+  const note = await Note.findById(id).exec();
   if (!note) {
     return res.status(400).json({ message: "Note not found." });
   }
