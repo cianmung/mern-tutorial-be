@@ -2,7 +2,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { setCredentials } from "../../features/auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:3500",
+  // baseUrl: "http://localhost:3500",
+  baseUrl: "https://technotes-api.onrender.com",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;
@@ -26,7 +27,7 @@ const baseQueryWithAuth = async (args, api, extraOptions) => {
       result = await baseQuery(args, api, extraOptions);
     } else {
       if (refreshResult?.error?.status == 403) {
-        refreshResult.error.data.message = "Your login has expired. ";
+        refreshResult.error.data.message = "Your login has expired.";
       }
       return refreshResult;
     }
